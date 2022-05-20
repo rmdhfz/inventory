@@ -250,19 +250,6 @@ class Backend extends CI_Controller {
 		$this->load->database();
 		json(response(true, 200, 'success', $this->db->query("SELECT id, name, asset_no, type, user_id FROM assets")->result()));
 	}
-	public function assetDataByUserId(){
-		if ($_SERVER['REQUEST_METHOD'] !== "POST") {
-			http_response_code(405);
-			return false;
-		}
-		$user_id = post('user_id');
-		if (!$user_id) {
-			http_response_code(405);
-			return false;
-		}
-		$this->load->database();
-		json(response(true, 200, 'success', $this->db->query("SELECT id, name, asset_no, type, user_id FROM assets WHERE user_id = ?", [$user_id])->result()));
-	}
 	public function listAsset(){
 		if ($_SERVER['REQUEST_METHOD'] !== "POST") {
 			http_response_code(401);
@@ -281,7 +268,6 @@ class Backend extends CI_Controller {
 			'name'		=>	post('name'),
 			'asset_no'	=>	$asset_no,
 			'type'		=>	post('type'),
-			'user_id'	=>	post('user_id'),
 		];
 		$save = $this->db->insert('assets', $data);
 		if (!$save) {
@@ -327,7 +313,6 @@ class Backend extends CI_Controller {
 			'name'		=>	post('name'),
 			'asset_no'	=>	$asset_no,
 			'type'		=>	post('type'),
-			'user_id'	=>	post('user_id'),
 		];
 		$edit = $this->db->where('id', $id, TRUE)->update('assets', $data);
 		if (!$edit) {
