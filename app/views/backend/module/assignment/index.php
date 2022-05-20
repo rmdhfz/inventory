@@ -88,17 +88,31 @@
             },
             responsive: "true",
         });
-        getListPaket();
-        function getListPaket(){
-            $.post('paket/data').done((res,xhr,status) => {
+
+        getListAsset();
+        function getListAsset(){
+            $.post('asset/data').done((res,xhr,status) => {
                 if (res.status) {
                     const data = res.data;
                     $.each(data, function(index, val) {
-                        $("#paket_id").append(`<option value='${val.id}'>${val.name}</option>`);
+                        $("#asset_id").append(`<option value='${val.id}'>${val.name}</option>`);
                     });
                 }
             })
         }
+
+        getListEmployee();
+        function getListEmployee(){
+            $.post('employee/data').done((res,xhr,status) => {
+                if (res.status) {
+                    const data = res.data;
+                    $.each(data, function(index, val) {
+                        $("#employee_id").append(`<option value='${val.id}'>${val.name}</option>`);
+                    });
+                }
+            })
+        }
+
         $("#form-assignment").submit(function(event) {
             event.preventDefault();
             let id = $("#id").val(), url;
