@@ -34,4 +34,12 @@ $route = [
 	'asset/id'			=>	'Backend/findAsset',
 	'asset/edit'		=>	'Backend/editAsset',
 	'asset/delete'		=>	'Backend/deleteAsset',
+
+	'assignment'			=>	'Backend/assignment',
+	'assignment/data'		=>	'Backend/assignmentData',
+	'assignment/list'		=>	'Backend/listAssignment',
+	'assignment/save'		=>	'Backend/saveAssignment',
+	'assignment/id'			=>	'Backend/findAssignment',
+	'assignment/edit'		=>	'Backend/editAssignment',
+	'assignment/delete'		=>	'Backend/deleteAssignment',
 ];
