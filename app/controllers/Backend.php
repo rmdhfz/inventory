@@ -338,4 +338,102 @@ class Backend extends CI_Controller {
 		json(response(true, 200, 'success delete'));
 	}
 	# asset
+	# assignment
+	public function assignment(){
+		$this->load([
+			'file'	=>	'module/assignment/index'
+		]);
+	}
+	public function assignmentData(){
+		$this->load->database();
+		json(response(true, 200, 'success', $this->db->query("SELECT id, name, assignment_no, type, user_id FROM assignments")->result()));
+	}
+	public function listAssignment(){
+		if ($_SERVER['REQUEST_METHOD'] !== "POST") {
+			http_response_code(401);
+			return false;
+		}
+		$this->load->model('model');
+		$this->model->listAssignment();
+	}
+	public function saveAssignment(){
+		if ($_SERVER['REQUEST_METHOD'] !== "POST") {
+			http_response_code(401);
+			return false;
+		}
+		$this->load->database();
+		$data = [
+			'name'			=>	post('name'),
+			'asset_id'		=>	post('asset_id'),
+			'employee_id'	=>	post('employee_id'),
+		];
+		$save = $this->db->insert('assignments', $data);
+		if (!$save) {
+			json(response(false, 500, 'failed save data'));
+		}
+		json(response(true, 201, 'success, created'));
+	}
+	public function findAssignment(){
+		if ($_SERVER['REQUEST_METHOD'] !== "POST") {
+			http_response_code(401);
+			return false;
+		}
+		$id = post('id');
+		if (!$id) {
+			http_response_code(400);
+			return false;
+		}
+		$this->load->database();
+		$check = $this->db->query("SELECT id, name, assignment_no, type, user_id FROM assignments WHERE id = ? LIMIT 1", [$id]);
+		if ($check->num_rows() == 0) {
+			http_response_code(404);
+			return false;
+		}
+		json(response(true, 200, 'success', $check->row()));
+	}
+	public function editAssignment(){
+		if ($_SERVER['REQUEST_METHOD'] !== "POST") {
+			http_response_code(401);
+			return false;
+		}
+		$id = post('id');
+		if (!$id) {
+			http_response_code(400);
+			return false;
+		}
+		$this->load->database();
+		$get = $this->db->query("SELECT id FROM assignments WHERE id = ? LIMIT 1", [$id]);
+		if ($get->num_rows() == 0) {
+			http_response_code(404);
+			return false;
+		}
+		$data = [
+			'name'			=>	post('name'),
+			'asset_id'		=>	post('asset_id'),
+			'employee_id'	=>	post('employee_id'),
+		];
+		$edit = $this->db->where('id', $id, TRUE)->update('assignments', $data);
+		if (!$edit) {
+			json(response(false, 500, 'failed edit'));
+		}
+		json(response(true, 201, 'success, updated'));
+	}
+	public function deleteAssignment(){
+		if ($_SERVER['REQUEST_METHOD'] !== "POST") {
+			http_response_code(401);
+			return false;
+		}
+		$id = post('id');
+		if (!$id) {
+			http_response_code(400);
+			return false;
+		}
+		$this->load->database();
+		$delete = $this->db->delete('assignments', ['id' => $id]);
+		if (!$delete) {
+			json(response(false, 500, 'failed delete'));
+		}
+		json(response(true, 200, 'success delete'));
+	}
+	# assignment
 }
