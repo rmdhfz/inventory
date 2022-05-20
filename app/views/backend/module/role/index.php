@@ -97,12 +97,12 @@
             }else{
                 url = "role/save";
             }
-            if (confirm("Apa data yang diinput sudah benar ?")) {
+            if (confirm("Is the input data correct ?")) {
                 $.post(url, $(this).serialize()).done((res, xhr, status) => {
                     ReloadTable(table);
                     ClearFormData($(this));
                     if (res.status && res.code == 200) {
-                        alert("Data sudah ada");
+                        alert("Data Already Exist");
                     }else{
                         alert(res.msg);
                     }
@@ -129,7 +129,7 @@
             if (!id) {
                 alert("id is null");
             }
-            if (confirm("Apa anda yakin ingin menghapus data ini ?")) {
+            if (confirm("Are you sure want to delete this data ?")) {
                 $.post('role/delete', {id: id}).done((res,xhr,status) => {
                     if (res.status) {
                         ReloadTable(table);
