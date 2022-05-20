@@ -363,7 +363,6 @@ class Backend extends CI_Controller {
 		}
 		$this->load->database();
 		$data = [
-			'name'			=>	post('name'),
 			'asset_id'		=>	post('asset_id'),
 			'employee_id'	=>	post('employee_id'),
 		];
@@ -384,7 +383,7 @@ class Backend extends CI_Controller {
 			return false;
 		}
 		$this->load->database();
-		$check = $this->db->query("SELECT id, name, assignment_no, type, user_id FROM assignments WHERE id = ? LIMIT 1", [$id]);
+		$check = $this->db->query("SELECT id, asset_id, employee_id FROM assignments WHERE id = ? LIMIT 1", [$id]);
 		if ($check->num_rows() == 0) {
 			http_response_code(404);
 			return false;
@@ -408,7 +407,6 @@ class Backend extends CI_Controller {
 			return false;
 		}
 		$data = [
-			'name'			=>	post('name'),
 			'asset_id'		=>	post('asset_id'),
 			'employee_id'	=>	post('employee_id'),
 		];
