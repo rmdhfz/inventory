@@ -88,17 +88,6 @@
             },
             responsive: "true",
         });
-        getListPaket();
-        function getListPaket(){
-            $.post('paket/data').done((res,xhr,status) => {
-                if (res.status) {
-                    const data = res.data;
-                    $.each(data, function(index, val) {
-                        $("#paket_id").append(`<option value='${val.id}'>${val.name}</option>`);
-                    });
-                }
-            })
-        }
         $("#form-employee").submit(function(event) {
             event.preventDefault();
             let id = $("#id").val(), url;
