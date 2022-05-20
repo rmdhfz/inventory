@@ -102,4 +102,28 @@ class Model extends CI_Model {
 		}
 		json($result);
 	}
+	public function listAsset(){
+		$this->load->database();
+		$get = $this->db->query("SELECT * FROM assets");
+		if ($get->num_rows() == 0) {
+			json(null);
+		}
+		$no = 0;
+		$result = ['data' => []];
+		foreach ($get->result() as $key => $value) { $no++;
+			$id = $value->id;
+			$options = $this->createOptions($id);
+			if (!$options) {
+				json("failed create options");
+			}
+			$result['data'][$key] = [
+				$no,
+				$value->name,
+				$value->asset_no,
+				$value->type,
+				$options
+			];
+		}
+		json($result);
+	}
 }
