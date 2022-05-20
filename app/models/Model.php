@@ -126,4 +126,28 @@ class Model extends CI_Model {
 		}
 		json($result);
 	}
+	public function listAssignment(){
+		$this->load->database();
+		$get = $this->db->query("SELECT a.name as asset, e.name as employee, m.id, m.asset_id, m.employee_id, m.date_assign FROM assignments m INNER JOIN assets a ON m.asset_id = a.id INNER JOIN employees e ON m.employee_id = e.id");
+		if ($get->num_rows() == 0) {
+			json(null);
+		}
+		$no = 0;
+		$result = ['data' => []];
+		foreach ($get->result() as $key => $value) { $no++;
+			$id = $value->id;
+			$options = $this->createOptions($id);
+			if (!$options) {
+				json("failed create options");
+			}
+			$result['data'][$key] = [
+				$no,
+				$value->asset,
+				$value->employee,
+				$value->date_assign,
+				$options
+			];
+		}
+		json($result);
+	}
 }

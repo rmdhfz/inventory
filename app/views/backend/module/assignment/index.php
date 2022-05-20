@@ -15,14 +15,18 @@
                                     <thead>
                                         <tr>
                                             <th>No.</th>
-                                            <th>Name</th>
+                                            <th>Asset</th>
+                                            <th>Employee</th>
+                                            <th>Date Assign</th>
                                             <th>Opsi</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>No.</th>
-                                            <th>Name</th>
+                                            <th>Asset</th>
+                                            <th>Employee</th>
+                                            <th>Date Assign</th>
                                             <th>Opsi</th>
                                         </tr>
                                     </tfoot>
