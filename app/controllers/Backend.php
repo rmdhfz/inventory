@@ -246,6 +246,25 @@ class Backend extends CI_Controller {
 			'file'	=>	'module/asset/index'
 		]);
 	}
+	public function assetNumber($is_return = false)
+	{
+		$this->load->database();
+		$get = $this->db->query("SELECT RIGHT(asset_no, 7) as sequence FROM asset LIMIT 1");
+		$sequence;
+		if ($get->num_rows() == 0) {
+			$sequence = "0000001";
+		}else{
+			$data = $get->row();
+			$sequence = intval($data->sequence) + 1;
+		}
+		// RFL/2022/0000001
+		$format = FORMAT_STRING.date('Y').sprintf("%07s", $sequence);
+		if ($is_return) {
+			return $format;
+		}else{
+			json(response(true, 200, 'success', $format));
+		}
+	}
 	public function assetData(){
 		$this->load->database();
 		json(response(true, 200, 'success', $this->db->query("SELECT id, name, asset_no, type, user_id FROM assets")->result()));
@@ -262,6 +281,10 @@ class Backend extends CI_Controller {
 		if ($_SERVER['REQUEST_METHOD'] !== "POST") {
 			http_response_code(401);
 			return false;
+		}
+		$asset_no = $this->assetNumber(true);
+		if (!$asset_no) {
+			json(response(false, 400, 'failed get assset number'));
 		}
 		$this->load->database();
 		$data = [
@@ -309,6 +332,7 @@ class Backend extends CI_Controller {
 			http_response_code(404);
 			return false;
 		}
+		$asset_no = post('asset_no');
 		$data = [
 			'name'		=>	post('name'),
 			'asset_no'	=>	$asset_no,

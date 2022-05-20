@@ -25,3 +25,5 @@ defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9);
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125);
 define("SECRET_GOOGLE_RECAPTCHA", "string");
 define("SALT_CUSTOM", "INVENTORY2022");
+define("FORMAT_STRING", "RFL");
+define("FORMAT_STRING_LONG", "REFLOW");

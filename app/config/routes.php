@@ -27,6 +27,7 @@ $route = [
 	'role/delete'		=>	'Backend/deleteRole',
 
 	'asset'				=>	'Backend/asset',
+	'asset/number'		=>	'Backend/assetNumber',
 	'asset/data'		=>	'Backend/assetData',
 	'asset/list'		=>	'Backend/listAsset',
 	'asset/save'		=>	'Backend/saveAsset',

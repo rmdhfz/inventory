@@ -100,6 +100,18 @@
             },
             responsive: "true",
         });
+
+        assetNumber();
+        function assetNumber(){
+            $.post('asset/number').done((res,xhr,status) => {
+                if (res.status) {
+                    const data = res.data;
+                    if (data) {
+                        $("#asset_no").val(data);
+                    }
+                }
+            })
+        }
         $("#form-asset").submit(function(event) {
             event.preventDefault();
             let id = $("#id").val(), url;
