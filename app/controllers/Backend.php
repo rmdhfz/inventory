@@ -240,4 +240,117 @@ class Backend extends CI_Controller {
 		json(response(true, 200, 'success delete'));
 	}
 	# role
+	# asset
+	public function asset(){
+		$this->load([
+			'file'	=>	'module/asset/index'
+		]);
+	}
+	public function assetData(){
+		$this->load->database();
+		json(response(true, 200, 'success', $this->db->query("SELECT id, name, asset_no, type, user_id FROM assets")->result()));
+	}
+	public function assetDataByUserId(){
+		if ($_SERVER['REQUEST_METHOD'] !== "POST") {
+			http_response_code(405);
+			return false;
+		}
+		$user_id = post('user_id');
+		if (!$user_id) {
+			http_response_code(405);
+			return false;
+		}
+		$this->load->database();
+		json(response(true, 200, 'success', $this->db->query("SELECT id, name, asset_no, type, user_id FROM assets WHERE user_id = ?", [$user_id])->result()));
+	}
+	public function listAsset(){
+		if ($_SERVER['REQUEST_METHOD'] !== "POST") {
+			http_response_code(401);
+			return false;
+		}
+		$this->load->model('model');
+		$this->model->listAsset();
+	}
+	public function saveAsset(){
+		if ($_SERVER['REQUEST_METHOD'] !== "POST") {
+			http_response_code(401);
+			return false;
+		}
+		$this->load->database();
+		$data = [
+			'name'		=>	post('name'),
+			'asset_no'	=>	$asset_no,
+			'type'		=>	post('type'),
+			'user_id'	=>	post('user_id'),
+		];
+		$save = $this->db->insert('assets', $data);
+		if (!$save) {
+			json(response(false, 500, 'failed save data'));
+		}
+		json(response(true, 201, 'success, created'));
+	}
+	public function findAsset(){
+		if ($_SERVER['REQUEST_METHOD'] !== "POST") {
+			http_response_code(401);
+			return false;
+		}
+		$id = post('id');
+		if (!$id) {
+			http_response_code(400);
+			return false;
+		}
+		$this->load->database();
+		$check = $this->db->query("SELECT id, name, asset_no, type, user_id FROM assets WHERE id = ? LIMIT 1", [$id]);
+		if ($check->num_rows() == 0) {
+			http_response_code(404);
+			return false;
+		}
+		json(response(true, 200, 'success', $check->row()));
+	}
+	public function editAsset(){
+		if ($_SERVER['REQUEST_METHOD'] !== "POST") {
+			http_response_code(401);
+			return false;
+		}
+		$id = post('id');
+		if (!$id) {
+			http_response_code(400);
+			return false;
+		}
+		$this->load->database();
+		$get = $this->db->query("SELECT id FROM assets WHERE id = ? LIMIT 1", [$id]);
+		if ($get->num_rows() == 0) {
+			http_response_code(404);
+			return false;
+		}
+		$data = [
+			'name'		=>	post('name'),
+			'asset_no'	=>	$asset_no,
+			'type'		=>	post('type'),
+			'user_id'	=>	post('user_id'),
+		];
+		$edit = $this->db->where('id', $id, TRUE)->update('assets', $data);
+		if (!$edit) {
+			json(response(false, 500, 'failed edit'));
+		}
+		json(response(true, 201, 'success, updated'));
+	}
+	public function deleteAsset(){
+		if ($_SERVER['REQUEST_METHOD'] !== "POST") {
+			http_response_code(401);
+			return false;
+		}
+		$id = post('id');
+		if (!$id) {
+			http_response_code(400);
+			return false;
+		}
+		$this->load->database();
+		$delete = $this->db->delete('assets', ['id' => $id]);
+		if (!$delete) {
+			json(response(false, 500, 'failed delete'));
+		}
+		json(response(true, 200, 'success delete'));
+	}
+	# asset
 }
