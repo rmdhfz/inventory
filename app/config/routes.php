@@ -25,4 +25,12 @@ $route = [
 	'role/id'			=>	'Backend/findRole',
 	'role/edit'			=>	'Backend/editRole',
 	'role/delete'		=>	'Backend/deleteRole',
+
+	'asset'				=>	'Backend/asset',
+	'asset/data'		=>	'Backend/assetData',
+	'asset/list'		=>	'Backend/listAsset',
+	'asset/save'		=>	'Backend/saveAsset',
+	'asset/id'			=>	'Backend/findAsset',
+	'asset/edit'		=>	'Backend/editAsset',
+	'asset/delete'		=>	'Backend/deleteAsset',
 ];
