@@ -17,7 +17,9 @@
                     <i class="fas fa-th-list bg-c-red" aria-hidden="true"></i>
                   </div>
                   <div class="col">
-                    <h6><b>Total Asset</b></h6><hr>
+                    <a href="<?php echo base_url('asset'); ?>">
+                    	<h6><b>Total Asset</b></h6><hr>
+                    </a>
                     <div id="total-asset"></div>
                   </div>
                 </div>
@@ -32,7 +34,9 @@
                     <i class="fa fa-users bg-c-blue" aria-hidden="true"></i>
                   </div>
                   <div class="col">
-                    <h6><b>Total Employee</b></h6>
+                    <a href="<?php echo base_url('employee'); ?>">
+                    	<h6><b>Total Employee</b></h6>
+                    </a>
                     <hr />
                     <div id="total-employee"></div>
                   </div>
@@ -48,7 +52,9 @@
                     <i class="fa fa-retweet bg-c-green" aria-hidden="true"></i>
                   </div>
                   <div class="col">
-                    <h6><b>Total Assignment</b></h6>
+                    <a href="<?php echo base_url('assignment'); ?>">
+                    	<h6><b>Total Assignment</b></h6>
+                    </a>
                     <hr />
                     <div id="total-assignment"></div>
                   </div>
