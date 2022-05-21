@@ -42,13 +42,13 @@
                 <input type="hidden" name="ip_addr" id="ip_addr" value="<?php echo $this->input->ip_address(); ?>">
                 <div class="one-frm">
                   <label>Username</label>
-                  <input type="text" name="username" id="username" required="1" autocomplete="off" minlength="4" maxlength="35" placeholder="masukan username kamu" autofocus="on" pattern="[a-zA-Z0-9\s]{4,35}">
+                  <input type="text" name="username" id="username" required="1" autocomplete="off" minlength="4" maxlength="35" placeholder="your username" autofocus="on" pattern="[a-zA-Z0-9\s]{4,35}">
                 </div>
                 <div class="one-frm">
                   <label>Password</label>
-                  <input type="password" name="password" id="password" required="1" autocomplete="off" minlength="4" maxlength="35" placeholder="masukan password kamu">
+                  <input type="password" name="password" id="password" required="1" autocomplete="off" minlength="4" maxlength="35" placeholder="your password">
                 </div>
-                <button id="masuk" type="submit" class="btn btn-style mt-3"> Masuk </button>
+                <button id="masuk" type="submit" class="btn btn-style mt-3"> Login </button>
               </form>
             </div>
           </div>
@@ -109,6 +109,7 @@
         document.getElementById('body').classList.remove('loading');
 
         if(http.readyState == 4 && http.status == 200){
+          alert("Success login!");
           setInterval(()=> {
             window.location = "<?php echo site_url('dashboard');?>";
           }, 500);
