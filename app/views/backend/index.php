@@ -311,7 +311,7 @@
                     <div class="navbar-container container-fluid">
                         <ul class="nav-left" style="margin-left: 1rem;">
                             <li>
-                                <!-- <img importance="low" loading="lazy" src="<?php echo site_url('assets/images/logo.webp');?>" draggable="false" style="height: 2rem; width: 9rem;" alt="profile-image" /> -->
+                                <img importance="low" loading="lazy" src="<?php echo site_url('assets/images/logo.jpeg');?>" draggable="false" style="height: 2rem; width: 3rem;" alt="profile-image" />
                             </li>
                             <li><small id="clock"></small></li>
                         </ul>
