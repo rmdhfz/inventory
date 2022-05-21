@@ -49,7 +49,7 @@
                     <form id="form-role" name="form-role" accept-charset="utf-8" autocomplete="off" method="post">
                         <input type="hidden" name="id" id="id" />
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label"> Nama </label>
+                            <label class="col-sm-2 col-form-label"> Name </label>
                             <div class="col-sm-10">
                                 <input type="text"name="name"id="name"class="form-control"required="1"placeholder="nama role"pattern="[a-zA-Z0-9\s]{4,35}"minlength="4"maxlength="35"data-toggle="tooltip"data-placement="top"title="nama role"/>
                             </div>
@@ -122,7 +122,7 @@
                 $.post('role/delete', {id: id}).done((res,xhr,status) => {
                     if (res.status) {
                         ReloadTable(table);
-                        alert("Data berhasil dihapus");
+                        alert("Success Deleted Data");
                     }
                 })
             }

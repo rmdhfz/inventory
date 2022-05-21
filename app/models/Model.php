@@ -60,7 +60,7 @@ class Model extends CI_Model {
 		$this->load->database();
 		$get = $this->db->query("SELECT * FROM employees");
 		if ($get->num_rows() == 0) {
-			json(null);
+			json([]);
 		}
 		$no = 0;
 		$result = ['data' => []];
@@ -84,7 +84,7 @@ class Model extends CI_Model {
 		$this->load->database();
 		$get = $this->db->query("SELECT * FROM roles");
 		if ($get->num_rows() == 0) {
-			json(null);
+			json([]);
 		}
 		$no = 0;
 		$result = ['data' => []];
@@ -106,7 +106,7 @@ class Model extends CI_Model {
 		$this->load->database();
 		$get = $this->db->query("SELECT * FROM assets");
 		if ($get->num_rows() == 0) {
-			json(null);
+			json([]);
 		}
 		$no = 0;
 		$result = ['data' => []];
@@ -118,8 +118,8 @@ class Model extends CI_Model {
 			}
 			$result['data'][$key] = [
 				$no,
-				$value->name,
 				$value->asset_no,
+				$value->name,
 				$value->type,
 				$options
 			];
@@ -130,7 +130,7 @@ class Model extends CI_Model {
 		$this->load->database();
 		$get = $this->db->query("SELECT a.name as asset, e.name as employee, m.id, m.asset_id, m.employee_id, m.date_assign FROM assignments m INNER JOIN assets a ON m.asset_id = a.id INNER JOIN employees e ON m.employee_id = e.id");
 		if ($get->num_rows() == 0) {
-			json(null);
+			json([]);
 		}
 		$no = 0;
 		$result = ['data' => []];

@@ -53,17 +53,20 @@
                     <form id="form-asset" name="form-asset" accept-charset="utf-8" autocomplete="off" method="post">
                         <input type="hidden" name="id" id="id" />
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label"> Nama </label>
-                            <div class="col-sm-5">
-                                <input type="text"name="name"id="name"class="form-control"required="1"placeholder="nama asset"pattern="[a-zA-Z0-9\s]{4,35}"minlength="4"maxlength="35"data-toggle="tooltip"data-placement="top"title="nama asset"/>
+                            <label class="col-sm-2 col-form-label"><small>Asset No</small></label>
+                            <div class="col-sm-10">
+                                <input type="text"name="asset_no"id="asset_no"class="form-control"required="1"placeholder="asset no"data-toggle="tooltip"data-placement="top"title="asset no" readonly="1" />
                             </div>
-                            <div class="col-sm-5">
-                                <input type="text"name="asset_no"id="asset_no"class="form-control"required="1"placeholder="asset no"pattern="[a-zA-Z0-9\s]{4,35}"minlength="4"maxlength="35"data-toggle="tooltip"data-placement="top"title="asset no"/>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label"> Name </label>
+                            <div class="col-sm-10">
+                                <input type="text"name="name"id="name"class="form-control"required="1"placeholder="nama asset"pattern="[a-zA-Z0-9\s]{4,35}"minlength="4"maxlength="35"data-toggle="tooltip"data-placement="top"title="nama asset"/>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label"> Type </label>
-                            <div class="col-sm-5">
+                            <div class="col-sm-10">
                                 <select id="type" name="type" required="1" class="form-control">
                                     <option value="" disabled="1" selected="1"> Select Type</option>
                                     <option value="Kursi">Kursi</option>
@@ -101,17 +104,16 @@
             responsive: "true",
         });
 
-        assetNumber();
-        function assetNumber(){
-            $.post('asset/number').done((res,xhr,status) => {
-                if (res.status) {
-                    const data = res.data;
-                    if (data) {
-                        $("#asset_no").val(data);
-                    }
-                }
+        async function assetNumber(){
+            await $.post('asset/number').done((res,xhr,status) => {
+                $("#asset_no").val('');
+                $("#asset_no").val(res.data.number);
             })
         }
+        $("#type").on('change', function(event) {
+            event.preventDefault();
+            assetNumber();
+        });
         $("#form-asset").submit(function(event) {
             event.preventDefault();
             let id = $("#id").val(), url;
@@ -158,7 +160,7 @@
                 $.post('asset/delete', {id: id}).done((res,xhr,status) => {
                     if (res.status) {
                         ReloadTable(table);
-                        alert("Data berhasil dihapus");
+                        alert("Success Deleted Data");
                     }
                 })
             }

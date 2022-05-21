@@ -42,7 +42,7 @@ class Backend extends CI_Controller {
 	}
 	public function employeeData(){
 		$this->load->database();
-		json(response(true, 200, 'success', $this->db->query("SELECT id, name, nim FROM employees")->result()));
+		json(response(true, 200, 'success', $this->db->query("SELECT id, name, email, phone FROM employees")->result()));
 	}
 	public function listEmployee(){
 		if ($_SERVER['REQUEST_METHOD'] !== "POST") {
@@ -249,7 +249,7 @@ class Backend extends CI_Controller {
 	public function assetNumber($is_return = false)
 	{
 		$this->load->database();
-		$get = $this->db->query("SELECT RIGHT(asset_no, 7) as sequence FROM asset LIMIT 1");
+		$get = $this->db->query("SELECT RIGHT(asset_no, 7) as sequence FROM assets LIMIT 1");
 		$sequence;
 		if ($get->num_rows() == 0) {
 			$sequence = "0000001";
@@ -257,17 +257,17 @@ class Backend extends CI_Controller {
 			$data = $get->row();
 			$sequence = intval($data->sequence) + 1;
 		}
-		// RFL/2022/0000001
-		$format = FORMAT_STRING.date('Y').sprintf("%07s", $sequence);
+		// RFL/2022/05/0000001
+		$format = FORMAT_STRING.'/'.date('Y').'/'.date('m').'/'.sprintf("%07s", $sequence);
 		if ($is_return) {
 			return $format;
 		}else{
-			json(response(true, 200, 'success', $format));
+			json(response(true, 200, 'success', ['number' => $format]));
 		}
 	}
 	public function assetData(){
 		$this->load->database();
-		json(response(true, 200, 'success', $this->db->query("SELECT id, name, asset_no, type, user_id FROM assets")->result()));
+		json(response(true, 200, 'success', $this->db->query("SELECT id, name, asset_no, type FROM assets")->result()));
 	}
 	public function listAsset(){
 		if ($_SERVER['REQUEST_METHOD'] !== "POST") {
@@ -309,7 +309,7 @@ class Backend extends CI_Controller {
 			return false;
 		}
 		$this->load->database();
-		$check = $this->db->query("SELECT id, name, asset_no, type, user_id FROM assets WHERE id = ? LIMIT 1", [$id]);
+		$check = $this->db->query("SELECT id, name, asset_no, type FROM assets WHERE id = ? LIMIT 1", [$id]);
 		if ($check->num_rows() == 0) {
 			http_response_code(404);
 			return false;

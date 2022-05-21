@@ -53,9 +53,12 @@
                     <form id="form-employee" name="form-employee" accept-charset="utf-8" autocomplete="off" method="post">
                         <input type="hidden" name="id" id="id" />
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label"> Nama </label>
+                            <label class="col-sm-2 col-form-label"> Name </label>
                             <div class="col-sm-5">
-                                <input type="text"name="name"id="name"class="form-control"required="1"placeholder="nama employee"pattern="[a-zA-Z0-9\s]{4,35}"minlength="4"maxlength="35"data-toggle="tooltip"data-placement="top"title="nama employee"/>
+                                <input type="text"name="name"id="name"class="form-control"required="1"placeholder="employee name"pattern="[a-zA-Z0-9\s]{4,35}"minlength="4"maxlength="35"data-toggle="tooltip"data-placement="top"title="employee name"/>
+                            </div>
+                            <div class="col-sm-5">
+                                <input type="number"name="phone"id="phone"class="form-control"required="1"placeholder="phone employee"minlength="10"maxlength="12"data-toggle="tooltip"data-placement="top"title="employee phone"/>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -134,7 +137,7 @@
                 $.post('employee/delete', {id: id}).done((res,xhr,status) => {
                     if (res.status) {
                         ReloadTable(table);
-                        alert("Data berhasil dihapus");
+                        alert("Success Deleted Data");
                     }
                 })
             }

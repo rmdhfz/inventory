@@ -15,8 +15,13 @@
         </a>
         <ul class="pcoded-submenu">
             <li>
-                <a href="<?php echo site_url('roles') ?>" class="waves-effect waves-dark" data-toggle="tooltip" data-placement="right" title="view data roles">
+                <a href="<?php echo site_url('role') ?>" class="waves-effect waves-dark" data-toggle="tooltip" data-placement="right" title="view data roles">
                     <span class="pcoded-mtext">Data Role</span>
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo site_url('asset') ?>" class="waves-effect waves-dark" data-toggle="tooltip" data-placement="right" title="view data asssets">
+                    <span class="pcoded-mtext">Data Asset</span>
                 </a>
             </li>
             <li>
@@ -27,14 +32,14 @@
         </ul>
     </li>
     <li>
-        <a href="<?php echo site_url('assignments') ?>" class="waves-effect waves-dark">
+        <a href="<?php echo site_url('assignment') ?>" class="waves-effect waves-dark">
             <span class="pcoded-micon">
                 <i class="feather icon-file-text" aria-hidden="true"></i>
             </span>
             <span class="pcoded-mtext"> Data Assignment </span>
         </a>
     </li>
-    <div class="pcoded-navigation-label">NAVIGASI TAMBAHAN</div>
+    <div class="pcoded-navigation-label">OTHER NAVIGATION</div>
     <li>
         <a href="javascript:void(0)" id="logout" class="waves-effect waves-dark" data-toggle="tooltip" data-placement="right" title="Logout">
             <span class="pcoded-micon">

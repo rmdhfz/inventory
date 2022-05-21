@@ -54,15 +54,12 @@
                         <input type="hidden" name="id" id="id" />
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label"> Asset </label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-5">
                                 <select id="asset_id" name="asset_id" class="form-control" required="1">
                                     <option value="" disabled="1" selected="1"> Select Asset</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label"> Employee </label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-5">
                                 <select id="employee_id" name="employee_id" class="form-control" required="1">
                                     <option value="" disabled="1" selected="1"> Select Employee</option>
                                 </select>
@@ -162,7 +159,7 @@
                 $.post('assignment/delete', {id: id}).done((res,xhr,status) => {
                     if (res.status) {
                         ReloadTable(table);
-                        alert("Data berhasil dihapus");
+                        alert("Success Deleted Data");
                     }
                 })
             }

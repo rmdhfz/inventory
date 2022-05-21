@@ -40,7 +40,7 @@
             </div>
             <form action="#" method="post" autocomplete="off">
               <div class="form-group first">
-                <label for="name">Nama</label>
+                <label for="name">Name</label>
                 <input type="text" class="form-control" id="name">
               </div>
               <div class="form-group">
