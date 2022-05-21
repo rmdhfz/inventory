@@ -458,4 +458,37 @@ class Backend extends CI_Controller {
 		json(response(true, 200, 'success delete'));
 	}
 	# assignment
+
+	# dashboard
+	function totalAsset()
+	{
+		if ($_SERVER['REQUEST_METHOD'] !== "POST") {
+			http_response_code(405);
+			return false;
+		}
+		$this->load->database();
+		$sql = $this->db->query("SELECT COUNT(id) as total FROM assets");
+		json(response(true, 200, 'success', ['total' => $sql->row()->total]));
+	}
+	function totalEmployee()
+	{
+		if ($_SERVER['REQUEST_METHOD'] !== "POST") {
+			http_response_code(405);
+			return false;
+		}
+		$this->load->database();
+		$sql = $this->db->query("SELECT COUNT(id) as total FROM employees");
+		json(response(true, 200, 'success', ['total' => $sql->row()->total]));
+	}
+	function totalAssignment()
+	{
+		if ($_SERVER['REQUEST_METHOD'] !== "POST") {
+			http_response_code(405);
+			return false;
+		}
+		$this->load->database();
+		$sql = $this->db->query("SELECT COUNT(id) as total FROM assignments");
+		json(response(true, 200, 'success', ['total' => $sql->row()->total]));
+	}
+	# dashboard
 }

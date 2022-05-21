@@ -42,4 +42,10 @@ $route = [
 	'assignment/id'			=>	'Backend/findAssignment',
 	'assignment/edit'		=>	'Backend/editAssignment',
 	'assignment/delete'		=>	'Backend/deleteAssignment',
+
+	# dashboard
+	'total/asset'			=> 'Backend/totalAsset',
+	'total/employee'		=> 'Backend/totalEmployee',
+	'total/assignment'		=> 'Backend/totalAssignment'
+	# dashboard
 ];
